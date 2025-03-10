@@ -35,16 +35,38 @@ def formatoBotonNumeros (Button, fila=0, columna=0, texto=""):
     
 ##Declaracion de variables     
 btn_ac, btnMas_Menos, btn_Porciento, btn_Entre,btn_Por, btn_Menos,btn_Mas=Button,Button,Button,Button,Button,Button,Button
-btn_7,btn8,btn9,btn_4,btn5,btn6,btn_1,btn2,btn3=Button,Button,Button,Button,Button,Button,Button,Button,Button
+btn_7,btn8,btn9,btn_4,btn5,btn6,btn_1,btn2,btn3, btnPunto, btn0=Button,Button,Button,Button,Button,Button,Button,Button,Button,Button,Button
 ##Metodo de POO PRIMERA FILA
 
 #formatoBoton(btn_ac,1,0, "AC")
 #formatoBoton(btnMas_Menos, 1, 1, "+/-")
 #formatoBoton(btn_Porciento, 1, 2, "%")
 #formatoBoton(btn_Entre, 1, 3, "/")
+def indicarAC():
+    numeros.set("")
+btn_ac = Button(ventana_inicio, text="AC",width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") , command=indicarAC)
+btn_ac.grid(row=1, column=0)
+
+def indicarMasMenos():
+    calcu.indicarOperacionConNumero(numeros.get(), "+/-")
+    numeros.set(calcu.realizarOperacion())
+btnMas_Menos = Button(ventana_inicio, text="+/-",width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") , command=indicarMasMenos)
+btnMas_Menos.grid(row=1, column=1)
+
+def indicarPorciento():
+    calcu.indicarOperacionConNumero(numeros.get(), "%")
+    numeros.set(calcu.realizarOperacion())
+btn_Porciento = Button(ventana_inicio, text="%",width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") , command=indicarPorciento)
+btn_Porciento.grid(row=1, column=2)
+
+def indicarDivision():
+    calcu.indicarOperacionConNumero(numeros.get(), "/")
+    numeros.set("")
+btn_Entre = Button(ventana_inicio, text="/",width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") , command=indicarDivision)
+btn_Entre.grid(row=1, column=3)
 
 def mostrarNumero(num):
-    print("7")
+    
     #msg.showinfo("title", "7")
     numeros.set(numeros.get()+ num)
 
@@ -53,12 +75,23 @@ formatoBotonNumeros(btn_7, 2, 0, "7")
 formatoBotonNumeros(btn8, 2, 1, "8")
 formatoBotonNumeros(btn9, 2, 2,"9")
 #formatoBoton(btn_Por, 2, 3, "x")
+def indicarMultiplicacion():
+    calcu.indicarOperacionConNumero(numeros.get(), "*")
+    numeros.set("")
+btn_Por = Button(ventana_inicio, text="*",width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") , command=indicarMultiplicacion)
+btn_Por.grid(row=2, column=3)
+
 
 ##TERCERA fila
 formatoBotonNumeros(btn_4, 3,0 , "4")
 formatoBotonNumeros(btn5,3,1,"5")
 formatoBotonNumeros(btn6,3,2,"6")
 #formatoBoton(btn_Menos,3,3,"-")
+def indicarResta():
+    calcu.indicarOperacionConNumero(numeros.get(), "-")
+    numeros.set("")
+btn_Menos = Button(ventana_inicio, text="-",width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") , command=indicarResta)
+btn_Menos.grid(row=3, column=3)
 
 ##CUARTA fila
 formatoBotonNumeros(btn_1,4,0,"1")
@@ -76,14 +109,18 @@ btn_Mas = Button(ventana_inicio, text="+",width=8, height=3, bg="#9EDF9C", fg="#
 btn_Mas.grid(row=4, column=3)
 
 
-btn_z = Button(ventana_inicio, text="z", width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") )
+btn_z = Button(ventana_inicio, text="Mood", width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold"))         
 btn_z.grid(row=5, column=0)
 
-btn0 = Button(ventana_inicio, text="0", width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") )
-btn0.grid(row=5, column=1)
-
-btnPunto = Button(ventana_inicio, text=".", width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") )
+formatoBotonNumeros( btn0,5,1,"0" )
+def indicarPunto():
+    calcu.indicarOperacionConNumero(numeros.get(), ".")
+    numeros.set(calcu.realizarOperacion())
+    
+btnPunto = Button(ventana_inicio, text=".",width=8, height=3, bg="#9EDF9C", fg="#62825D",font=("roboto", 15, "bold") ,
+                 command=indicarPunto)
 btnPunto.grid(row=5, column=2)
+
 
 
 def calcularResultado():
